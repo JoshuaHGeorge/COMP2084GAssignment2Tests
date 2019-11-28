@@ -47,9 +47,7 @@ namespace COMP2084GAssignment2Tests
             {
                 HomeworkId = 1,
                 AssignmentId = assignment.AssignmentId,
-                Assignment = assignment,
                 CourseId = course.CourseId,
-                Course = course,
                 Due = dateTime,
                 Description = "Lots of work."
 
@@ -65,7 +63,7 @@ namespace COMP2084GAssignment2Tests
             });
             homework.Add(new Homework
             {
-                HomeworkId = 2,
+                HomeworkId = 3,
                 AssignmentId = assignment.AssignmentId,
                 CourseId = course.CourseId,
                 Due = DateTime.Now,
@@ -95,8 +93,11 @@ namespace COMP2084GAssignment2Tests
             result.Wait();
 
             var viewResult = (ViewResult)result.Result;
+
+            List<Homework> model = (List<Homework>)viewResult.Model;
+
             //check
-            Assert.IsNotNull(viewResult.ViewName, "Index");
+            CollectionAssert.AreEqual(model, homework);
         }
     }
 }
