@@ -83,6 +83,7 @@ namespace COMP2084GAssignment2Tests
         }
 
         [TestMethod]
+        // Test method to see if the view loads
         public void LoadIndexView()
         {
             //setup
@@ -99,6 +100,7 @@ namespace COMP2084GAssignment2Tests
             Assert.AreEqual(viewResult.ViewName, "Index");
         }
         [TestMethod]
+        // Test method to see if the index view loads the data
         public void LoadIndexData()
         {
             //setup
@@ -114,6 +116,66 @@ namespace COMP2084GAssignment2Tests
 
             //check
             CollectionAssert.AreEqual(model, homework);
+        }
+
+        //
+        [TestMethod]
+        // Test method to see if the index loads the data
+        public void LoadDetailsView()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Index();
+            result.Wait();
+
+            var viewResult = (ViewResult)result.Result;
+
+            List<Homework> model = (List<Homework>)viewResult.Model;
+
+            //check
+            CollectionAssert.AreEqual(model, homework);
+        }
+        [TestMethod]
+        // Test method to see if the details view loads the data
+        public void LoadDetailsData()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Details(1);
+            result.Wait();
+
+            var viewResult = (ViewResult)result.Result;
+
+            List<Homework> model = (List<Homework>)viewResult.Model;
+
+            Homework[] specific = model.ToArray();
+
+            //check
+            Assert.IsTrue(homework.Contains(specific[0]));
+        }
+        [TestMethod]
+        // Test method to see if the details view loads the data and gets the correct index
+        public void LoadDetailsIndex()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Details(1);
+            result.Wait();
+
+            var viewResult = (ViewResult)result.Result;
+
+            List<Homework> model = (List<Homework>)viewResult.Model;
+
+            Homework[] specific = model.ToArray();
+
+            //check
+            Assert.IsTrue(homework.IndexOf(specific[0]) == 0);
         }
     }
 }
