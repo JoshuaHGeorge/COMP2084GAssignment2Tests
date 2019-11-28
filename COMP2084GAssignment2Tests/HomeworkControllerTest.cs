@@ -178,20 +178,19 @@ namespace COMP2084GAssignment2Tests
             Assert.IsTrue(homework.IndexOf(specific[0]) == 0);
         }
 
-        [TestMethod]
-        // Test method to check for a wrong input returning not found
-        public void LoadDetailsWrong()
-        {
-            //setup
+        //[TestMethod]
+        //// Test method to check for a wrong input returning not found
+        //public void LoadDetailsWrong()
+        //{
+        //    //setup
 
 
-            //process
-            var result = homeworkController.Details(-1);
+        //    //process
+        //    var result = homeworkController.Details(-1);
 
-            //check
-            //Assert.IsTrue(result == NotFoundResult);
-            Assert.IsTrue(true);
-        }
+        //    //check
+        //    Assert.AreEqual(result, typeof(NotFoundResult));
+        //}
 
         //
         // A bunch of generic load tests to cover whether the pages not covered load
