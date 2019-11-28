@@ -1,0 +1,104 @@
+﻿@model IEnumerable<COMP2084GAssignment2.Models.Homework>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Due)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assignment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Due)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Assignment.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Name)
+                </td>
+                <td>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.HomeworkId">Edit</a> 
+                    }
+
+                    | <a asp-action="Details" asp-route-id="@item.HomeworkId">Details</a> |
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.HomeworkId">Delete</a>
+                    }
+                </td>
+                <td>
+                    Due in
+                    @((item.Due.Value.Subtract(DateTime.Now)).Days)
+                    days,
+
+                    and
+                    @((item.Due.Value.Subtract(DateTime.Now)).Hours)
+                    hours.
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="calender">
+    @foreach (var item in Model)
+    {
+        //TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time"));
+
+        String hold = ($"style=margin-left:{(((item.Due.Value.Subtract(DateTime.Now)).Days) * 96) + (((item.Due.Value.Subtract(DateTime.Now)).Hours) * 4)}px");
+        <p @hold class="assignment">
+
+            @*@(((item.Due.Value.Subtract(DateTime.Now)).Days) * 100)
+
+                @($"style=\"margin:{(((item.Due.Value.Subtract(DateTime.Now)).Days) * 100)}px\"")*@
+
+
+            @Html.DisplayFor(modelItem => item.Course.Name)
+
+            @Html.DisplayFor(modelItem => item.Assignment.Name)
+            ,
+            @Html.DisplayFor(modelItem => item.Description)
+        </p>
+    }
+
+</div>
+
