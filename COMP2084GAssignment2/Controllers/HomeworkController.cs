@@ -53,7 +53,7 @@ namespace COMP2084GAssignment2.Controllers
         {
             ViewData["AssignmentId"] = new SelectList(_context.Assignment, "AssignmentId", "Name");
             ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name");
-            return View();
+            return View("Create");
         }
 
         // POST: Homework/Create
@@ -89,7 +89,7 @@ namespace COMP2084GAssignment2.Controllers
             }
             ViewData["AssignmentId"] = new SelectList(_context.Assignment, "AssignmentId", "Name", homework.AssignmentId);
             ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name", homework.CourseId);
-            return View(homework);
+            return View("Edit", homework);
         }
 
         // POST: Homework/Edit/5
@@ -146,7 +146,7 @@ namespace COMP2084GAssignment2.Controllers
                 return NotFound();
             }
 
-            return View(homework);
+            return View("Delete", homework);
         }
 
         // POST: Homework/Delete/5

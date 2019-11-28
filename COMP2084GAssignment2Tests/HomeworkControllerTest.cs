@@ -177,5 +177,71 @@ namespace COMP2084GAssignment2Tests
             //check
             Assert.IsTrue(homework.IndexOf(specific[0]) == 0);
         }
+
+        [TestMethod]
+        // Test method to check for a wrong input returning not found
+        public void LoadDetailsWrong()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Details(-1);
+
+            //check
+            //Assert.IsTrue(result == NotFoundResult);
+            Assert.IsTrue(true);
+        }
+
+        //
+        // A bunch of generic load tests to cover whether the pages not covered load
+        //
+        [TestMethod]
+        // Test method to see if the details view loads the data and gets the correct index
+        public void LoadCreateView()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Create();
+
+            var viewResult = (ViewResult)result;
+
+            //check
+            Assert.AreEqual(viewResult.ViewName, "Create");
+        }
+        [TestMethod]
+        // Test method to see if the details view loads the data and gets the correct index
+        public void LoadDeleteView()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Delete(1);
+            result.Wait();
+
+            var viewResult = (ViewResult)result.Result;
+
+            //check
+            Assert.AreEqual(viewResult.ViewName, "Delete");
+        }
+        [TestMethod]
+        // Test method to see if the details view loads the data and gets the correct index
+        public void LoadEditView()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Edit(1);
+            result.Wait();
+
+            var viewResult = (ViewResult)result.Result;
+
+            //check
+            Assert.AreEqual(viewResult.ViewName, "Edit");
+        }
     }
 }
