@@ -25,7 +25,7 @@ namespace COMP2084GAssignment2.Controllers
         public async Task<IActionResult> Index()
         {
             var plannerContext = _context.Homework.Include(h => h.Assignment).Include(h => h.Course);
-            return View(await plannerContext.ToListAsync());
+            return View("Index", await plannerContext.ToListAsync());
         }
 
         // GET: Homework/Details/5

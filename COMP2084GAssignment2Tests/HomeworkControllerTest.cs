@@ -94,6 +94,22 @@ namespace COMP2084GAssignment2Tests
 
             var viewResult = (ViewResult)result.Result;
 
+
+            //check
+            Assert.AreEqual(viewResult.ViewName, "Index");
+        }
+        [TestMethod]
+        public void LoadIndexData()
+        {
+            //setup
+
+
+            //process
+            var result = homeworkController.Index();
+            result.Wait();
+
+            var viewResult = (ViewResult)result.Result;
+
             List<Homework> model = (List<Homework>)viewResult.Model;
 
             //check
