@@ -127,15 +127,13 @@ namespace COMP2084GAssignment2Tests
 
 
             //process
-            var result = homeworkController.Index();
+            var result = homeworkController.Details(1);
             result.Wait();
 
             var viewResult = (ViewResult)result.Result;
 
-            List<Homework> model = (List<Homework>)viewResult.Model;
-
             //check
-            CollectionAssert.AreEqual(model, homework);
+            Assert.AreEqual(viewResult.ViewName, "Details");
         }
         [TestMethod]
         // Test method to see if the details view loads the data
@@ -150,7 +148,8 @@ namespace COMP2084GAssignment2Tests
 
             var viewResult = (ViewResult)result.Result;
 
-            List<Homework> model = (List<Homework>)viewResult.Model;
+            List<Homework> model = new List<Homework>();
+            model.Add((Homework)viewResult.Model);
 
             Homework[] specific = model.ToArray();
 
@@ -170,7 +169,8 @@ namespace COMP2084GAssignment2Tests
 
             var viewResult = (ViewResult)result.Result;
 
-            List<Homework> model = (List<Homework>)viewResult.Model;
+            List<Homework> model = new List<Homework>();
+            model.Add((Homework)viewResult.Model);
 
             Homework[] specific = model.ToArray();
 

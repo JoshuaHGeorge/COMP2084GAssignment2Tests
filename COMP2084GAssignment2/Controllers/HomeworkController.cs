@@ -45,7 +45,7 @@ namespace COMP2084GAssignment2.Controllers
                 return NotFound();
             }
 
-            return View(homework);
+            return View("Details", homework);
         }
 
         // GET: Homework/Create
